@@ -1,103 +1,599 @@
+"use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import SimpleCarousel from "../components/SimpleCarousel";
+import MobileMenu from "../components/MobileMenu";
+import TestimonialCard from "../components/TestimonialCard";
+import ProcessStep from "../components/ProcessStep";
 
-export default function Home() {
+const studio = [
+  "/9I3A1849%20copiar.jpg",
+  "/9I3A1857%20copiar%202.jpg",
+  "/9I3A1867%20copiar.jpg",
+  "/9I3A1872%20copiar.jpg",
+  "/9I3A1874%20copiar.jpg",
+  "/9I3A1881%20copiar.jpg",
+];
+
+const testimonials = [
+  {
+    quote: "Experiência incrível! O estúdio tem uma energia única e o resultado superou todas as expectativas.",
+    author: "Maria Silva",
+    role: "Empresária"
+  },
+  {
+    quote: "Profissionalismo excepcional. Desde o primeiro contato até a entrega das fotos, tudo perfeito.",
+    author: "João Santos",
+    role: "Advogado"
+  },
+  {
+    quote: "Ambiente acolhedor e resultado impecável. Recomendo para quem busca qualidade e criatividade.",
+    author: "Ana Costa",
+    role: "Arquiteta"
+  }
+];
+
+
+
+const processSteps = [
+  {
+    number: "1",
+    title: "Briefing",
+    description: "Conversamos sobre seus objetivos, estilo desejado e planejamos todos os detalhes da sessão."
+  },
+  {
+    number: "2",
+    title: "Preparação",
+    description: "Orientações sobre roupas, maquiagem e tudo que você precisa saber para o dia da sessão."
+  },
+  {
+    number: "3",
+    title: "Sessão",
+    description: "Momento criativo no estúdio, com direção profissional para capturar as melhores imagens."
+  },
+  {
+    number: "4",
+    title: "Entrega",
+    description: "Seleção, edição e entrega das fotos finais em alta resolução via galeria online."
+  }
+];
+
+function HeroSlider() {
+  const heroImages = ["/9I3A1853%20copiar.jpg", ...studio];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      <div className="absolute inset-0" style={{ transform: `translateY(${scrollY * 0.5}px)` }}>
+        {heroImages.map((image, index) => (
+          <div
+            key={image}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentIndex ? 'opacity-100' : 'opacity-0'
+            }`}
           >
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src={image}
+              alt={`Estúdio 1631 ${index + 1}`}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="object-cover scale-110"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+        ))}
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+      
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 text-center">
+        <div className="mb-8">
+          <Image src="/1631%20Logo%20(3)-12.png" alt="Estúdio 1631" width={400} height={400} className="mx-auto" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        
+        <p className="text-xl md:text-2xl text-white font-light leading-relaxed mb-10">
+          O ESPAÇO CERTO PARA TRANSFORMAR INSPIRAÇÃO EM CONTEÚDO.
+        </p>
+        
+        <div className="bg-white/8 backdrop-blur-md border border-white/15 px-6 py-6 mb-10 max-w-lg mx-auto">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <a href="#agende" className="group inline-flex items-center justify-center bg-white text-black px-8 py-4 font-bold text-lg hover:bg-white/90 transition-all duration-300">
+              Agendar sessão
+              <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </a>
+            <a href="#sobre" className="group inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 font-bold text-lg hover:bg-black hover:text-white transition-all duration-300">
+              Saiba mais
+            </a>
+
+          </div>
+        </div>
+      </div>
+      
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60">
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm">Explore nosso trabalho</span>
+          <svg className="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function Home() {
+  const [formData, setFormData] = useState({
+    nome: '',
+    data: '',
+    horario: ''
+  });
+  const [activeSection, setActiveSection] = useState('');
+  const [isHeaderDark, setIsHeaderDark] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      
+      // IDs das seções claras (header preto)
+      const lightSectionIds = ['sobre', 'processo', 'depoimentos', 'faq'];
+      // IDs das seções escuras (header branco)
+      const darkSectionIds = ['cta', 'agende', 'contato'];
+      
+      let inLightSection = false;
+      
+      // Verificar seções claras
+      lightSectionIds.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) {
+          const sectionTop = section.offsetTop - 100;
+          const sectionBottom = section.offsetTop + section.offsetHeight;
+          if (scrollY >= sectionTop && scrollY < sectionBottom) {
+            inLightSection = true;
+            setActiveSection(id);
+          }
+        }
+      });
+      
+      // Verificar seções escuras (sobrescreve se necessário)
+      darkSectionIds.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) {
+          const sectionTop = section.offsetTop - 100;
+          const sectionBottom = section.offsetTop + section.offsetHeight;
+          if (scrollY >= sectionTop && scrollY < sectionBottom) {
+            console.log(`Seção escura detectada: ${id}`);
+            inLightSection = false;
+            setActiveSection(id);
+          }
+        }
+      });
+      
+      setIsHeaderDark(inLightSection);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleAgendarClick = () => {
+    if (!formData.nome || !formData.data || !formData.horario) {
+      alert('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    const dataFormatada = new Date(formData.data).toLocaleDateString('pt-BR');
+    const mensagem = `Olá! Meu nome é ${formData.nome} e gostaria de agendar uma sessão de fotos para o dia ${dataFormatada} às ${formData.horario}!`;
+    const whatsappUrl = `https://wa.me/5500000000000?text=${encodeURIComponent(mensagem)}`;
+    
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+
+  return (
+    <div className="text-foreground bg-background min-h-screen">
+      <header className={`fixed top-0 inset-x-0 z-50 backdrop-blur-xl border-b transition-all duration-300 ${
+        isHeaderDark 
+          ? 'bg-white/10 border-black/20 text-black' 
+          : 'bg-white/10 border-white/20 text-white'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Image 
+              src={isHeaderDark ? "/1631%20Logo%20(3)-4.png" : "/1631%20Logo%20(3)-3.png"} 
+              alt="1631" 
+              width={140} 
+              height={32} 
+              className="transition-transform hover:scale-105" 
+            />
+          </div>
+          <div className="flex items-center gap-6">
+            <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
+              <a href="#sobre" className={`px-3 py-2 hover:opacity-70 transition-all duration-300 ${activeSection === 'sobre' ? 'scale-110' : ''}`}>Sobre</a>
+              <span className={isHeaderDark ? 'text-black/30' : 'text-white/30'}>|</span>
+              <a href="#agende" className={`px-3 py-2 hover:opacity-70 transition-all duration-300 ${activeSection === 'agende' ? 'scale-110' : ''}`}>Agende</a>
+            </nav>
+            <MobileMenu isDark={isHeaderDark} />
+          </div>
+        </div>
+      </header>
+
+      <HeroSlider />
+
+      <section id="sobre" className="bg-neutral-50 text-neutral-900">
+        <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="order-2 lg:order-1">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-px bg-black"></div>
+                <span className="text-sm font-medium text-neutral-600 uppercase tracking-wider">Sobre nós</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
+                Criamos imagens que <span className="text-neutral-600">inspiram</span>
+              </h2>
+              <div className="space-y-6 text-lg text-neutral-700 leading-relaxed">
+                <p>
+                  O 1631 é um estúdio focado em soluções visuais com linguagem contemporânea. 
+                  Combinamos técnica apurada com criatividade para entregar resultados únicos.
+                </p>
+                <p>
+                  Nosso espaço versátil, equipamentos de ponta e experiência em produção 
+                  garantem que cada projeto seja executado com excelência, do briefing à finalização.
+                </p>
+              </div>
+            </div>
+            <div className="order-1 lg:order-2">
+              <SimpleCarousel images={studio} altPrefix="Estúdio" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cta" className="bg-black text-white">
+        <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-12 h-px bg-white"></div>
+              <span className="text-sm font-medium text-white/70 uppercase tracking-wider">Pronto para começar?</span>
+              <div className="w-12 h-px bg-white"></div>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
+              Transforme suas ideias em <span className="text-white/70">imagens únicas</span>
+            </h2>
+            <p className="text-xl text-white/80 max-w-3xl mx-auto mb-12 leading-relaxed">
+              Cada sessão é uma oportunidade de criar algo especial. Vamos conversar sobre seu projeto e descobrir como podemos dar vida à sua visão.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <a href="#agende" className="group bg-white text-black px-10 py-5 text-lg font-bold hover:bg-neutral-100 transition-all duration-300 hover:scale-105">
+                <span className="group-hover:translate-x-1 transition-transform inline-block">Agendar sessão</span>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <section id="depoimentos" className="bg-white text-neutral-900">
+        <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-12 h-px bg-black"></div>
+              <span className="text-sm font-medium text-neutral-600 uppercase tracking-wider">Depoimentos</span>
+              <div className="w-12 h-px bg-black"></div>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">O que dizem sobre nós</h2>
+            <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
+              A satisfação dos nossos clientes é nossa maior conquista.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <TestimonialCard key={index} {...testimonial} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="processo" className="bg-neutral-50 text-neutral-900">
+        <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-px bg-black"></div>
+                <span className="text-sm font-medium text-neutral-600 uppercase tracking-wider">Processo</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
+                Como <span className="text-neutral-600">trabalhamos</span>
+              </h2>
+              <p className="text-xl text-neutral-600 leading-relaxed">
+                Nosso processo é pensado para garantir que cada detalhe seja cuidado, 
+                desde o primeiro contato até a entrega final das imagens.
+              </p>
+            </div>
+            <div className="space-y-8">
+              {processSteps.map((step, index) => (
+                <ProcessStep 
+                  key={index} 
+                  {...step} 
+                  isLast={index === processSteps.length - 1}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="agende" className="bg-black text-white">
+        <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-12 h-px bg-white"></div>
+              <span className="text-sm font-medium text-white/70 uppercase tracking-wider">Agendamento</span>
+              <div className="w-12 h-px bg-white"></div>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Vamos criar juntos?</h2>
+            <p className="text-xl text-white/80 max-w-3xl mx-auto">
+              Escolha a melhor data e horário para sua sessão. Entraremos em contato para alinhar todos os detalhes.
+            </p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-8 md:p-12">
+              <div className="space-y-6 mb-8">
+                <div>
+                  <label className="block text-sm font-medium text-white/80 mb-3">Seu nome</label>
+                  <input 
+                    type="text" 
+                    name="nome"
+                    value={formData.nome}
+                    onChange={handleInputChange}
+                    placeholder="Como podemos te chamar?" 
+                    className="w-full bg-white/10 border border-white/20 px-6 py-4 text-white placeholder-white/60 backdrop-blur" 
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-white/80 mb-3">Data preferida</label>
+                  <input 
+                    type="date" 
+                    name="data"
+                    value={formData.data}
+                    onChange={handleInputChange}
+                    className="w-full bg-white/10 border border-white/20 px-6 py-4 text-white placeholder-white/60 backdrop-blur" 
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-white/80 mb-3">Horário preferido</label>
+                  <input 
+                    type="time" 
+                    name="horario"
+                    value={formData.horario}
+                    onChange={handleInputChange}
+                    className="w-full bg-white/10 border border-white/20 px-6 py-4 text-white placeholder-white/60 backdrop-blur" 
+                  />
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <button 
+                  onClick={handleAgendarClick}
+                  className="inline-flex items-center gap-3 bg-white text-black px-8 py-4 font-semibold hover:bg-neutral-100 transition-colors"
+                >
+                  Agendar horário!
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" className="bg-neutral-50 text-neutral-900">
+        <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-12 h-px bg-black"></div>
+              <span className="text-sm font-medium text-neutral-600 uppercase tracking-wider">FAQ</span>
+              <div className="w-12 h-px bg-black"></div>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Dúvidas frequentes</h2>
+            <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
+              Respostas para as perguntas mais comuns sobre nossos serviços.
+            </p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto space-y-4">
+            {[
+              {
+                question: "Quanto tempo dura uma sessão?",
+                answer: "Depende do tipo de sessão. Retratos corporativos duram cerca de 1 hora, enquanto ensaios pessoais podem levar até 2 horas para explorar diferentes looks e conceitos."
+              },
+              {
+                question: "Quando recebo as fotos?",
+                answer: "O prazo varia conforme o pacote escolhido. Retratos corporativos ficam prontos em 5 dias, ensaios pessoais em 7 dias, e projetos comerciais podem levar até 10 dias."
+              },
+              {
+                question: "Posso levar acompanhante?",
+                answer: "Claro! Você pode trazer um acompanhante para se sentir mais à vontade durante a sessão. Nosso estúdio tem espaço confortável para isso."
+              },
+              {
+                question: "Preciso levar roupas?",
+                answer: "Sim, recomendamos trazer algumas opções de roupas. Oferecemos consultoria de styling antes da sessão para ajudar na escolha das melhores peças."
+              }
+            ].map((faq, index) => (
+              <div key={index} className="bg-white border border-black/5 overflow-hidden">
+                <button 
+                  onClick={() => toggleFaq(index)}
+                  className="w-full p-6 md:p-8 text-left flex items-center justify-between hover:bg-neutral-50 transition-colors cursor-pointer"
+                >
+                  <h3 className="text-lg font-semibold text-neutral-900">{faq.question}</h3>
+                  <svg 
+                    className={`w-5 h-5 text-neutral-600 transition-transform duration-200 ${openFaqIndex === index ? 'rotate-180' : ''}`}
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div className={`overflow-hidden transition-all duration-300 ${openFaqIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className="px-6 md:px-8 pb-6 md:pb-8">
+                    <p className="text-neutral-600 leading-relaxed mt-4">{faq.answer}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="contato" className="bg-neutral-950 text-white">
+        <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-px bg-white"></div>
+                <span className="text-sm font-medium text-white/70 uppercase tracking-wider">Contato</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
+                Vamos conversar sobre seu <span className="text-white/70">projeto</span>
+              </h2>
+              <p className="text-xl text-white/80 leading-relaxed mb-10">
+                Conte sobre sua ideia e retornamos rapidamente com uma proposta personalizada para suas necessidades.
+              </p>
+              
+              <div className="space-y-6">
+                <a href="mailto:contato@1631.studio" className="group flex items-center gap-4 p-6 bg-white/10 backdrop-blur border border-white/15 hover:bg-white/15 transition-all duration-300">
+                  <div className="w-12 h-12 bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-xs text-white/70 uppercase tracking-wider">E-mail</p>
+                    <p className="font-semibold text-lg">contato@1631.studio</p>
+                  </div>
+                </a>
+                
+                <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 p-6 bg-white/10 backdrop-blur border border-white/15 hover:bg-white/15 transition-all duration-300">
+                  <div className="w-12 h-12 bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.109"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-xs text-white/70 uppercase tracking-wider">WhatsApp</p>
+                    <p className="font-semibold text-lg">Chamar no WhatsApp</p>
+                  </div>
+                </a>
+                
+                <div className="flex items-center gap-4 p-6 bg-white/10 backdrop-blur border border-white/15">
+                  <div className="w-12 h-12 bg-white/20 flex items-center justify-center">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-xs text-white/70 uppercase tracking-wider">Localização</p>
+                    <p className="font-semibold text-lg">Avenida General Daltro Filho, 1631</p>
+                    <p className="text-white/60 text-sm">Novo Hamburgo, RS</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white/5 backdrop-blur border border-white/10 p-8 md:p-10">
+              <h3 className="text-2xl font-bold mb-6">Envie uma mensagem</h3>
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <input type="text" placeholder="Seu nome" className="w-full bg-white/10 border border-white/20 px-6 py-4 text-white placeholder-white/60 backdrop-blur" />
+                  <input type="email" placeholder="Seu e-mail" className="w-full bg-white/10 border border-white/20 px-6 py-4 text-white placeholder-white/60 backdrop-blur" />
+                </div>
+                <input type="text" placeholder="Assunto" className="w-full bg-white/10 border border-white/20 px-6 py-4 text-white placeholder-white/60 backdrop-blur" />
+                <textarea rows={5} placeholder="Conte sobre seu projeto..." className="w-full bg-white/10 border border-white/20 px-6 py-4 text-white placeholder-white/60 backdrop-blur resize-none"></textarea>
+                <button type="submit" className="w-full bg-white text-black px-6 py-4 font-semibold hover:bg-neutral-100 transition-colors">
+                  Enviar mensagem
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-black text-white border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <Image src="/1631%20Logo%20(3)-23.png" alt="1631" width={140} height={32} className="mb-4" />
+              <p className="text-white/70 leading-relaxed">
+                Estúdio de fotografia contemporânea em Novo Hamburgo. 
+                Criamos imagens que contam histórias únicas.
+              </p>
+            </div>
+            <div className="flex justify-end">
+              <div>
+                <h4 className="font-semibold mb-4">Navegação</h4>
+                <div className="grid grid-cols-2 gap-x-9 gap-y-2 text-sm text-white/70">
+                  <a href="#sobre" className="hover:text-white transition-colors">Sobre</a>
+                  <a href="#processo" className="hover:text-white transition-colors">Processo</a>
+                  <a href="#faq" className="hover:text-white transition-colors">Dúvidas</a>
+                  <a href="#depoimentos" className="hover:text-white transition-colors">Depoimentos</a>
+                  <a href="#agende" className="hover:text-white transition-colors">Agende</a>
+                </div>
+              </div>
+            </div>
+            <div className="ml-auto">
+              <h4 className="font-semibold mb-4">Contato</h4>
+              <ul className="space-y-2 text-sm text-white/70">
+                <li><a href="mailto:contato@1631.studio" className="hover:text-white transition-colors">contato@1631.studio</a></li>
+                <li><a href="https://wa.me/5500000000000" className="hover:text-white transition-colors">WhatsApp</a></li>
+                <li>Novo Hamburgo, RS</li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-white/60">
+              © {new Date().getFullYear()} Estúdio 1631. Todos os direitos reservados.
+            </p>
+            <div className="flex items-center gap-4">
+              <a href="https://www.instagram.com/estudio.1631" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );
 }
+

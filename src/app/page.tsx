@@ -5,6 +5,8 @@ import SimpleCarousel from "../components/SimpleCarousel";
 import MobileMenu from "../components/MobileMenu";
 import TestimonialCard from "../components/TestimonialCard";
 import ProcessStep from "../components/ProcessStep";
+import BookingScheduler from "../components/BookingScheduler";
+
 
 const studio = [
   "/9I3A1849%20copiar.jpg",
@@ -38,23 +40,18 @@ const testimonials = [
 const processSteps = [
   {
     number: "1",
-    title: "Briefing",
-    description: "Conversamos sobre seus objetivos, estilo desejado e planejamos todos os detalhes da sessão."
+    title: "Agende seu horário",
+    description: "Preencha o formulário abaixo com seus dados e horário preferido para reservar o estúdio."
   },
   {
     number: "2",
-    title: "Preparação",
-    description: "Orientações sobre roupas, maquiagem e tudo que você precisa saber para o dia da sessão."
+    title: "Fale com a gente pelo WhatsApp",
+    description: "Você entrará em contato pelo WhatsApp para confirmar detalhes e finalizar a reserva."
   },
   {
     number: "3",
-    title: "Sessão",
-    description: "Momento criativo no estúdio, com direção profissional para capturar as melhores imagens."
-  },
-  {
-    number: "4",
-    title: "Entrega",
-    description: "Seleção, edição e entrega das fotos finais em alta resolução via galeria online."
+    title: "Crie seu conteúdo!",
+    description: "Aproveite nosso espaço totalmente equipado para criar suas imagens incríveis."
   }
 ];
 
@@ -98,32 +95,28 @@ function HeroSlider() {
         ))}
         <div className="absolute inset-0 bg-black/40" />
       </div>
-      
+
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 text-center">
-        <div className="mb-8">
-          <Image src="/1631%20Logo%20(3)-12.png" alt="Estúdio 1631" width={400} height={400} className="mx-auto" />
-        </div>
-        
-        <p className="text-xl md:text-2xl text-white font-light leading-relaxed mb-10">
+        <p className="text-xl md:text-3xl text-white font-light leading-relaxed mb-10 whitespace-nowrap">
           O ESPAÇO CERTO PARA TRANSFORMAR INSPIRAÇÃO EM CONTEÚDO.
         </p>
-        
-        <div className="bg-white/8 backdrop-blur-md border border-white/15 px-6 py-6 mb-10 max-w-lg mx-auto">
+
+        <div className="bg-white/8 backdrop-blur-md border border-white/15 px-4 py-4 mb-10 max-w-md mx-auto">
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <a href="#agende" className="group inline-flex items-center justify-center bg-white text-black px-8 py-4 font-bold text-lg hover:bg-white/90 transition-all duration-300">
+            <a href="#agende" className="group inline-flex items-center justify-center bg-white text-black px-6 py-3 font-bold text-base hover:bg-white/90 transition-all duration-300">
               Agendar sessão
-              <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </a>
-            <a href="#sobre" className="group inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 font-bold text-lg hover:bg-black hover:text-white transition-all duration-300">
+            <a href="#sobre" className="group inline-flex items-center justify-center border-2 border-white text-white px-6 py-3 font-bold text-base hover:bg-black hover:text-white transition-all duration-300">
               Saiba mais
             </a>
 
           </div>
         </div>
       </div>
-      
+
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60">
         <div className="flex flex-col items-center gap-2">
           <span className="text-sm">Explore nosso trabalho</span>
@@ -137,11 +130,7 @@ function HeroSlider() {
 }
 
 export default function Home() {
-  const [formData, setFormData] = useState({
-    nome: '',
-    data: '',
-    horario: ''
-  });
+
   const [activeSection, setActiveSection] = useState('');
   const [isHeaderDark, setIsHeaderDark] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -149,14 +138,14 @@ export default function Home() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      
+
       // IDs das seções claras (header preto)
       const lightSectionIds = ['sobre', 'processo', 'depoimentos', 'faq'];
       // IDs das seções escuras (header branco)
       const darkSectionIds = ['cta', 'agende', 'contato'];
-      
+
       let inLightSection = false;
-      
+
       // Verificar seções claras
       lightSectionIds.forEach(id => {
         const section = document.getElementById(id);
@@ -169,7 +158,7 @@ export default function Home() {
           }
         }
       });
-      
+
       // Verificar seções escuras (sobrescreve se necessário)
       darkSectionIds.forEach(id => {
         const section = document.getElementById(id);
@@ -183,7 +172,7 @@ export default function Home() {
           }
         }
       });
-      
+
       setIsHeaderDark(inLightSection);
     };
 
@@ -192,26 +181,9 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
-  const handleAgendarClick = () => {
-    if (!formData.nome || !formData.data || !formData.horario) {
-      alert('Por favor, preencha todos os campos.');
-      return;
-    }
 
-    const dataFormatada = new Date(formData.data).toLocaleDateString('pt-BR');
-    const mensagem = `Olá! Meu nome é ${formData.nome} e gostaria de agendar uma sessão de fotos para o dia ${dataFormatada} às ${formData.horario}!`;
-    const whatsappUrl = `https://wa.me/5500000000000?text=${encodeURIComponent(mensagem)}`;
-    
-    window.open(whatsappUrl, '_blank');
-  };
+
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -220,18 +192,18 @@ export default function Home() {
   return (
     <div className="text-foreground bg-background min-h-screen">
       <header className={`fixed top-0 inset-x-0 z-50 backdrop-blur-xl border-b transition-all duration-300 ${
-        isHeaderDark 
-          ? 'bg-white/10 border-black/20 text-black' 
+        isHeaderDark
+          ? 'bg-white/10 border-black/20 text-black'
           : 'bg-white/10 border-white/20 text-white'
       }`}>
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Image 
-              src={isHeaderDark ? "/1631%20Logo%20(3)-4.png" : "/1631%20Logo%20(3)-3.png"} 
-              alt="1631" 
-              width={140} 
-              height={32} 
-              className="transition-transform hover:scale-105" 
+            <Image
+              src={isHeaderDark ? "/1631%20Logo%20(3)-4.png" : "/1631%20Logo%20(3)-3.png"}
+              alt="1631"
+              width={140}
+              height={32}
+              className="transition-transform hover:scale-105"
             />
           </div>
           <div className="flex items-center gap-6">
@@ -256,16 +228,11 @@ export default function Home() {
                 <span className="text-sm font-medium text-neutral-600 uppercase tracking-wider">Sobre nós</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-                Criamos imagens que <span className="text-neutral-600">inspiram</span>
+                Fotografia que <span className="text-neutral-600">conecta</span>
               </h2>
               <div className="space-y-6 text-lg text-neutral-700 leading-relaxed">
                 <p>
-                  O 1631 é um estúdio focado em soluções visuais com linguagem contemporânea. 
-                  Combinamos técnica apurada com criatividade para entregar resultados únicos.
-                </p>
-                <p>
-                  Nosso espaço versátil, equipamentos de ponta e experiência em produção 
-                  garantem que cada projeto seja executado com excelência, do briefing à finalização.
+                  Oferecemos um espaço equipado e versátil onde você pode criar imagens autênticas sem se preocupar com equipamentos ou locação. Nossa estrutura permite que você foque no que realmente importa: contar sua história através da fotografia. Com iluminação profissional, cenários adaptáveis e toda a infraestrutura necessária, transformamos suas ideias em registros únicos que comunicam sua essência de forma genuína e impactante.
                 </p>
               </div>
             </div>
@@ -276,54 +243,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="cta" className="bg-black text-white">
-        <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-12 h-px bg-white"></div>
-              <span className="text-sm font-medium text-white/70 uppercase tracking-wider">Pronto para começar?</span>
-              <div className="w-12 h-px bg-white"></div>
-            </div>
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
-              Transforme suas ideias em <span className="text-white/70">imagens únicas</span>
-            </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto mb-12 leading-relaxed">
-              Cada sessão é uma oportunidade de criar algo especial. Vamos conversar sobre seu projeto e descobrir como podemos dar vida à sua visão.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a href="#agende" className="group bg-white text-black px-10 py-5 text-lg font-bold hover:bg-neutral-100 transition-all duration-300 hover:scale-105">
-                <span className="group-hover:translate-x-1 transition-transform inline-block">Agendar sessão</span>
-              </a>
-
-            </div>
-          </div>
-        </div>
-      </section>
 
 
 
-      <section id="depoimentos" className="bg-white text-neutral-900">
-        <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-12 h-px bg-black"></div>
-              <span className="text-sm font-medium text-neutral-600 uppercase tracking-wider">Depoimentos</span>
-              <div className="w-12 h-px bg-black"></div>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">O que dizem sobre nós</h2>
-            <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-              A satisfação dos nossos clientes é nossa maior conquista.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard key={index} {...testimonial} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="processo" className="bg-neutral-50 text-neutral-900">
+      <section id="processo" className="bg-gray-100 text-neutral-900">
         <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div>
@@ -332,18 +255,17 @@ export default function Home() {
                 <span className="text-sm font-medium text-neutral-600 uppercase tracking-wider">Processo</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-                Como <span className="text-neutral-600">trabalhamos</span>
+                Como <span className="text-neutral-600">funciona</span>
               </h2>
               <p className="text-xl text-neutral-600 leading-relaxed">
-                Nosso processo é pensado para garantir que cada detalhe seja cuidado, 
-                desde o primeiro contato até a entrega final das imagens.
+                Três passos simples para você ter acesso ao nosso estúdio.
               </p>
             </div>
             <div className="space-y-8">
               {processSteps.map((step, index) => (
-                <ProcessStep 
-                  key={index} 
-                  {...step} 
+                <ProcessStep
+                  key={index}
+                  {...step}
                   isLast={index === processSteps.length - 1}
                 />
               ))}
@@ -365,52 +287,9 @@ export default function Home() {
               Escolha a melhor data e horário para sua sessão. Entraremos em contato para alinhar todos os detalhes.
             </p>
           </div>
-          
+
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-8 md:p-12">
-              <div className="space-y-6 mb-8">
-                <div>
-                  <label className="block text-sm font-medium text-white/80 mb-3">Seu nome</label>
-                  <input 
-                    type="text" 
-                    name="nome"
-                    value={formData.nome}
-                    onChange={handleInputChange}
-                    placeholder="Como podemos te chamar?" 
-                    className="w-full bg-white/10 border border-white/20 px-6 py-4 text-white placeholder-white/60 backdrop-blur" 
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-white/80 mb-3">Data preferida</label>
-                  <input 
-                    type="date" 
-                    name="data"
-                    value={formData.data}
-                    onChange={handleInputChange}
-                    className="w-full bg-white/10 border border-white/20 px-6 py-4 text-white placeholder-white/60 backdrop-blur" 
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-white/80 mb-3">Horário preferido</label>
-                  <input 
-                    type="time" 
-                    name="horario"
-                    value={formData.horario}
-                    onChange={handleInputChange}
-                    className="w-full bg-white/10 border border-white/20 px-6 py-4 text-white placeholder-white/60 backdrop-blur" 
-                  />
-                </div>
-              </div>
-              
-              <div className="text-center">
-                <button 
-                  onClick={handleAgendarClick}
-                  className="inline-flex items-center gap-3 bg-white text-black px-8 py-4 font-semibold hover:bg-neutral-100 transition-colors"
-                >
-                  Agendar horário!
-                </button>
-              </div>
-            </div>
+            <BookingScheduler />
           </div>
         </div>
       </section>
@@ -428,36 +307,44 @@ export default function Home() {
               Respostas para as perguntas mais comuns sobre nossos serviços.
             </p>
           </div>
-          
+
           <div className="max-w-4xl mx-auto space-y-4">
             {[
               {
-                question: "Quanto tempo dura uma sessão?",
-                answer: "Depende do tipo de sessão. Retratos corporativos duram cerca de 1 hora, enquanto ensaios pessoais podem levar até 2 horas para explorar diferentes looks e conceitos."
+                question: "Com quanto tempo de antecedência preciso reservar?",
+                answer: "É necessário fazer a reserva com pelo menos 24 horas de antecedência. Isso nos permite organizar o espaço e garantir que tudo esteja pronto para sua sessão."
               },
               {
-                question: "Quando recebo as fotos?",
-                answer: "O prazo varia conforme o pacote escolhido. Retratos corporativos ficam prontos em 5 dias, ensaios pessoais em 7 dias, e projetos comerciais podem levar até 10 dias."
+                question: "Posso cancelar minha reserva?",
+                answer: "Sim, mas o cancelamento deve ser feito com pelo menos 3 dias de antecedência. Cancelamentos com menos tempo podem estar sujeitos a taxas."
               },
               {
-                question: "Posso levar acompanhante?",
-                answer: "Claro! Você pode trazer um acompanhante para se sentir mais à vontade durante a sessão. Nosso estúdio tem espaço confortável para isso."
+                question: "O que está incluído no aluguel do estúdio?",
+                answer: "O estúdio inclui iluminação profissional completa, fundos variados, tripés, rebatedores e todo equipamento básico de iluminação. Você só precisa trazer sua câmera."
               },
               {
-                question: "Preciso levar roupas?",
-                answer: "Sim, recomendamos trazer algumas opções de roupas. Oferecemos consultoria de styling antes da sessão para ajudar na escolha das melhores peças."
+                question: "Qual é a duração mínima de aluguel?",
+                answer: "O tempo mínimo de locação é de 2 horas. Oferecemos pacotes de 2h, 4h, 6h e diária completa para atender diferentes necessidades de produção."
+              },
+              {
+                question: "Posso trazer minha equipe?",
+                answer: "Claro! O estúdio comporta confortavelmente até 8 pessoas, incluindo fotógrafo, assistentes, modelos e equipe de produção."
+              },
+              {
+                question: "Há estacionamento disponível?",
+                answer: "Sim, temos estacionamento gratuito no local para você e sua equipe, facilitando o transporte de equipamentos e materiais."
               }
             ].map((faq, index) => (
               <div key={index} className="bg-white border border-black/5 overflow-hidden">
-                <button 
+                <button
                   onClick={() => toggleFaq(index)}
                   className="w-full p-6 md:p-8 text-left flex items-center justify-between hover:bg-neutral-50 transition-colors cursor-pointer"
                 >
                   <h3 className="text-lg font-semibold text-neutral-900">{faq.question}</h3>
-                  <svg 
+                  <svg
                     className={`w-5 h-5 text-neutral-600 transition-transform duration-200 ${openFaqIndex === index ? 'rotate-180' : ''}`}
-                    fill="none" 
-                    stroke="currentColor" 
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -488,7 +375,7 @@ export default function Home() {
               <p className="text-xl text-white/80 leading-relaxed mb-10">
                 Conte sobre sua ideia e retornamos rapidamente com uma proposta personalizada para suas necessidades.
               </p>
-              
+
               <div className="space-y-6">
                 <a href="mailto:contato@1631.studio" className="group flex items-center gap-4 p-6 bg-white/10 backdrop-blur border border-white/15 hover:bg-white/15 transition-all duration-300">
                   <div className="w-12 h-12 bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -502,7 +389,7 @@ export default function Home() {
                     <p className="font-semibold text-lg">contato@1631.studio</p>
                   </div>
                 </a>
-                
+
                 <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 p-6 bg-white/10 backdrop-blur border border-white/15 hover:bg-white/15 transition-all duration-300">
                   <div className="w-12 h-12 bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -514,7 +401,7 @@ export default function Home() {
                     <p className="font-semibold text-lg">Chamar no WhatsApp</p>
                   </div>
                 </a>
-                
+
                 <div className="flex items-center gap-4 p-6 bg-white/10 backdrop-blur border border-white/15">
                   <div className="w-12 h-12 bg-white/20 flex items-center justify-center">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -529,7 +416,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
+
             <div className="bg-white/5 backdrop-blur border border-white/10 p-8 md:p-10">
               <h3 className="text-2xl font-bold mb-6">Envie uma mensagem</h3>
               <form className="space-y-6">
@@ -554,7 +441,7 @@ export default function Home() {
             <div>
               <Image src="/1631%20Logo%20(3)-23.png" alt="1631" width={140} height={32} className="mb-4" />
               <p className="text-white/70 leading-relaxed">
-                Estúdio de fotografia contemporânea em Novo Hamburgo. 
+                Estúdio de fotografia contemporânea em Novo Hamburgo.
                 Criamos imagens que contam histórias únicas.
               </p>
             </div>

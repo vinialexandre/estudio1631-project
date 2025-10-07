@@ -31,11 +31,10 @@ export default function MobileMenu({ isDark = false }: MobileMenuProps) {
             ? 'bg-white/95 border-black/5 text-black' 
             : 'bg-black/95 border-white/5 text-white'
         }`}>
-          <nav className="flex flex-col space-y-3 px-4">
+          <nav className="flex flex-col items-center text-center space-y-3 px-4">
             <a href="#sobre" className="py-2 hover:opacity-70" onClick={() => setIsOpen(false)}>Sobre</a>
-            <a href="#servicos" className="py-2 hover:opacity-70" onClick={() => setIsOpen(false)}>Serviços</a>
-            <a href="#portfolio" className="py-2 hover:opacity-70" onClick={() => setIsOpen(false)}>Portfolio</a>
             <a href="#processo" className="py-2 hover:opacity-70" onClick={() => setIsOpen(false)}>Processo</a>
+            <a href="#faq" className="py-2 hover:opacity-70" onClick={() => setIsOpen(false)}>Dúvidas</a>
             <a href="#agende" className="py-2 hover:opacity-70" onClick={() => setIsOpen(false)}>Agende</a>
             <a href="#contato" className="py-2 hover:opacity-70" onClick={() => setIsOpen(false)}>Contato</a>
           </nav>

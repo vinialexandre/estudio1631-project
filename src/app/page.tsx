@@ -250,12 +250,7 @@ export default function Home() {
                 <p>
                   Oferecemos um espaço equipado e versátil onde você pode criar imagens autênticas sem se preocupar com equipamentos ou locação. Nossa estrutura permite que você foque no que realmente importa: contar sua história através da fotografia. Com iluminação profissional, cenários adaptáveis e toda a infraestrutura necessária, transformamos suas ideias em registros únicos que comunicam sua essência de forma genuína e impactante.
                 </p>
-                <a href="/cenarios.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 hover:bg-neutral-800 transition-colors">
-                  Ver cenários
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
+              
               </div>
             </div>
             <div className="order-1 lg:order-2">

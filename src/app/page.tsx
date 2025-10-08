@@ -204,9 +204,9 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-6">
             <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
-              <a href="#sobre" className={`px-3 py-2 hover:opacity-70 transition-all duration-300 ${activeSection === 'sobre' ? 'scale-110' : ''}`}>Sobre</a>
+              <a href="#sobre" className="px-3 py-2 hover:opacity-70 transition-all duration-300">Sobre</a>
               <span className={isHeaderDark ? 'text-black/30' : 'text-white/30'}>|</span>
-              <a href="#agende" className={`px-3 py-2 hover:opacity-70 transition-all duration-300 ${activeSection === 'agende' ? 'scale-110' : ''}`}>Agende</a>
+              <a href="#agende" className="px-3 py-2 hover:opacity-70 transition-all duration-300">Agende</a>
 
 
             </nav>
@@ -250,6 +250,12 @@ export default function Home() {
                 <p>
                   Oferecemos um espaço equipado e versátil onde você pode criar imagens autênticas sem se preocupar com equipamentos ou locação. Nossa estrutura permite que você foque no que realmente importa: contar sua história através da fotografia. Com iluminação profissional, cenários adaptáveis e toda a infraestrutura necessária, transformamos suas ideias em registros únicos que comunicam sua essência de forma genuína e impactante.
                 </p>
+                <a href="/cenarios.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 hover:bg-neutral-800 transition-colors">
+                  Ver cenários
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
               </div>
             </div>
             <div className="order-1 lg:order-2">
@@ -430,10 +436,6 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div className="text-center md:text-left">
               <Image src="/1631%20Logo%20(3)-23.png" alt="Estúdio 1631 - Fotografia Profissional" width={140} height={32} className="mb-4 mx-auto md:mx-0" />
-              <p className="text-white/70 leading-relaxed">
-                Estúdio de fotografia contemporânea em Novo Hamburgo.
-                Criamos imagens que contam histórias únicas.
-              </p>
             </div>
             <div className="hidden md:flex justify-end">
               <div>

@@ -383,7 +383,7 @@ export default function BookingScheduler() {
         {step < 4 && <SummaryCard />}
       </div>
       
-      <div className={` mt-0 md:mt-0 flex items-center ${step === 0 ? 'justify-end' : 'justify-between'}`}>
+      <div className={`mt-0 md:-mt-12 flex items-center ${step === 0 ? 'justify-end' : 'justify-between'}`}>
         {step > 0 && (
           <button onClick={back} className="inline-flex items-center gap-2 px-4 py-3 border border-white/20 text-white/80 hover:text-white disabled:opacity-40 transition-all duration-300 hover:scale-105 disabled:hover:scale-100 cursor-pointer"><ArrowLeft className="w-4 h-4"/>Voltar</button>
         )}

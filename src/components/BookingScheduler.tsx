@@ -15,7 +15,7 @@ const PACKAGES: Pkg[] = [
   { id: "10h", label: "Pacote de 10 horas", hours: 10, price: 1200 }
 ];
 
-const WHATSAPP_NUMBER = "5500000000000";
+const WHATSAPP_NUMBER = "5551996093589";
 
 function currency(v: number) {
   return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v);

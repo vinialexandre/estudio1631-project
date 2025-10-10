@@ -187,7 +187,7 @@ export default function BookingScheduler() {
 
   function SummaryCard() {
     return (
-      <aside className="hidden md:block border border-white/15 bg-white/5 p-4 md:sticky md:top-4 h-[550px]">
+      <aside className="hidden md:block border border-white/15 bg-white/5 p-4 h-[600px]">
         <div className="flex items-center justify-center gap-2 text-white/70 text-sm mb-3"><Info className="w-4 h-4"/>Resumo</div>
         <div className="mx-2 h-px bg-white/20 mb-3"></div>
         <div className="space-y-2 text-sm">

@@ -11,12 +11,17 @@ import ContactSection from "../components/ContactSection";
 
 
 const studio = [
-  "/9I3A1849%20copiar.jpg",
-  "/9I3A1857%20copiar%202.jpg",
-  "/9I3A1867%20copiar.jpg",
-  "/9I3A1872%20copiar.jpg",
-  "/9I3A1874%20copiar.jpg",
-  "/9I3A1881%20copiar.jpg",
+  "/9I3A1849-copiar.jpg",
+  "/9I3A1853-copiar.jpg",
+  "/9I3A1872-copiar.jpg",
+  "/9I3A1874-copiar.jpg",
+  "/9I3A2901-copiar.jpg",
+  "/9I3A2902-copiar.jpg",
+  "/9I3A2936-copiar.jpg",
+  "/9I3A2938-copiar.jpg",
+  "/9I3A2939-copiar.jpg",
+  "/9I3A2941-copiar.jpg",
+  "/9I3A2945-copiar.jpg"
 ];
 
 const testimonials = [
@@ -58,7 +63,7 @@ const processSteps = [
 ];
 
 function HeroSlider() {
-  const heroImages = ["/9I3A1853%20copiar.jpg", ...studio];
+  const heroImages = ["/9I3A1853-copiar.jpg", ...studio];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [scrollY, setScrollY] = useState(0);
 

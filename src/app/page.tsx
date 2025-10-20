@@ -63,7 +63,7 @@ const processSteps = [
 ];
 
 function HeroSlider() {
-  const heroImages = ["/9I3A1853%20copiar.jpg", ...studio];
+  const heroImages = ["/9I3A1853-copiar.jpg", ...studio];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [scrollY, setScrollY] = useState(0);
 

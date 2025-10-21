@@ -281,7 +281,7 @@ export default function BookingScheduler() {
       {step === 1 && (
         <div className="animate-in slide-in-from-right-5 duration-500">
           <div className="flex items-center gap-2 mb-2"><Calendar className="w-4 h-4"/><span>Selecione a data</span></div>
-          <div className="hidden sm:block text-sm text-white/70 mb-2">* Agendamentos devem ser feitos com 24 horas de antecedência</div>
+          <div className="hidden sm:block text-sm text-white/70 mb-2">* Agendamentos devem ser feitos com 48 horas de antecedência</div>
           <CustomCalendar date={date} onSelect={(d)=>{ setDate(d); if (d) setStep(2); }} />
         </div>
       )}

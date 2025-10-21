@@ -270,12 +270,11 @@ export default function Home() {
               </h2>
               <div className="space-y-6 text-lg text-neutral-700 leading-relaxed">
                 <p>
-                  Oferecemos um espaço amplo e versátil onde você pode criar imagens autênticas e criativas. 
-                  Nossa estrutura permite que você foque no que realmente importa: contar sua história através da fotografia e vídeo. 
-                  Temos a opção de alugar iluminação (flashes) de fotografia, mas também temos muita luz natural para explorar tanto 
-                  com câmera como com seu celular. 
-                  Nossos cenários são adaptáveis e temos toda a infraestrutura necessária para você transformar suas ideias em registros 
-                  únicos que comunicam sua essência de forma genuína e impactante.
+                  Oferecemos um espaço amplo e versátil, projetado para que você possa criar imagens autênticas e cheias de criatividade. Nossa estrutura foi pensada para que você concentre sua energia no essencial: contar sua história por meio da fotografia e do vídeo.
+
+Disponibilizamos iluminação profissional (flashes) para locação, além de excelente luz natural, ideal tanto para câmeras quanto para produções com celular.
+
+Nossos cenários são adaptáveis e contam com infraestrutura completa, permitindo que você transforme suas ideias em registros únicos, que traduzem sua essência de forma genuína e impactante.
                 </p>
 
                 
@@ -386,7 +385,11 @@ export default function Home() {
               },
               {
                 question: "Posso cancelar minha reserva?",
-                answer: "Sim, mas o cancelamento deve ser feito com pelo menos 3 dias de antecedência. Cancelamentos com menos tempo podem estar sujeitos a taxas."
+                answer: "Cancelamentos não são reembolsáveis, uma vez que o horário é reservado exclusivamente para você."
+              },
+              {
+                question: "Posso reagendar minha reserva?",
+                answer: "Reagendamentos podem ser solicitados com até 48 horas de antecedência. Após esse prazo, será aplicada uma taxa de 30% sobre o valor total da locação."
               },
               {
                 question: "O que está incluído no aluguel do estúdio?",
@@ -431,7 +434,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="regras" className="bg-neutral-50 text-neutral-900">
+      <section id="regras" className="bg-gray-100 text-neutral-900">
         <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-6">

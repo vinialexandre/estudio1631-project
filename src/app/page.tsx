@@ -9,14 +9,22 @@ import ProcessStep from "../components/ProcessStep";
 import BookingScheduler from "../components/BookingScheduler";
 import ContactSection from "../components/ContactSection";
 
+// Imagens para o banner inicial
+const bannerImages = [
+  "/B9I3A1853-copiar.jpg",
+  "/B9I3A4324-copiar.jpg",
+  "/B9I3A4364-copiar.jpg",
+  "/B9I3A4420-copiar.jpg",
+  "/B9I3A7882-copiar.jpg",
+  "/B9I3A9435-copiar.jpg"
+];
 
+// Imagens para o carrossel da seção "Sobre"
 const studio = [
   "/9I3A1849-copiar.jpg",
-  "/9I3A1853-copiar.jpg",
   "/9I3A1872-copiar.jpg",
   "/9I3A1874-copiar.jpg",
   "/9I3A2901-copiar.jpg",
-  "/9I3A2902-copiar.jpg",
   "/9I3A2936-copiar.jpg",
   "/9I3A2938-copiar.jpg",
   "/9I3A2939-copiar.jpg",
@@ -58,21 +66,20 @@ const processSteps = [
   {
     number: "3",
     title: "Crie seu conteúdo!",
-    description: "Aproveite nosso espaço totalmente equipado para criar suas imagens incríveis."
+    description: "Aproveite nosso espaço totalmente equipado para criar suas imagens com segurança e tranquilidade."
   }
 ];
 
 function HeroSlider() {
-  const heroImages = ["/9I3A1853-copiar.jpg", ...studio];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % heroImages.length);
+      setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [heroImages.length]);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -83,7 +90,7 @@ function HeroSlider() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0" style={{ transform: `translateY(${scrollY * 0.5}px)` }}>
-        {heroImages.map((image, index) => (
+        {bannerImages.map((image, index) => (
           <div
             key={image}
             className={`absolute inset-0 transition-opacity duration-1000 ${
@@ -249,13 +256,16 @@ export default function Home() {
                 <span className="text-sm font-medium text-neutral-600 uppercase tracking-wider">Sobre nós</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-                Fotografia que <span className="text-neutral-600">conecta</span>
+                Libere sua <span className="text-neutral-600">criatividade</span>
               </h2>
               <div className="space-y-6 text-lg text-neutral-700 leading-relaxed">
                 <p>
-                  Oferecemos um espaço amplo e versátil onde você pode criar imagens autênticas e criativas. Nossa estrutura permite que você foque no que realmente importa: contar sua história através da fotografia.
-                  Temos a opção de locar iluminação e também temos muita luz natural para explorar tanto com câmera como com seu celular.
-                  Nossos cenários são adaptáveis e temos toda a infraestrutura necessária para você transformar suas ideias em registros únicos que comunicam sua essência de forma genuína e impactante.
+                  Oferecemos um espaço amplo e versátil onde você pode criar imagens autênticas e criativas. 
+                  Nossa estrutura permite que você foque no que realmente importa: contar sua história através da fotografia e vídeo. 
+                  Temos a opção de alugar iluminação (flashes) de fotografia, mas também temos muita luz natural para explorar tanto 
+                  com câmera como com seu celular. 
+                  Nossos cenários são adaptáveis e temos toda a infraestrutura necessária para você transformar suas ideias em registros 
+                  únicos que comunicam sua essência de forma genuína e impactante.
                 </p>
 
                 
@@ -297,6 +307,10 @@ export default function Home() {
                     <div className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 bg-neutral-600 rounded-full mt-2 flex-shrink-0"></div>
                       <span className="text-base text-neutral-700">2 cubos brancos</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-neutral-600 rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-base text-neutral-700">Disponibilizamos, ainda, o serviço de locação de equipamentos fotográficos por diária, diretamente em nosso estúdio.</span>
                     </div>
                   </div>
                 </div>
@@ -358,7 +372,7 @@ export default function Home() {
             {[
               {
                 question: "Com quanto tempo de antecedência preciso reservar?",
-                answer: "É necessário fazer a reserva com pelo menos 24 horas de antecedência. Isso nos permite organizar o espaço e garantir que tudo esteja pronto para sua sessão."
+                answer: "É necessário fazer a reserva com pelo menos 48 horas de antecedência. Isso nos permite organizar o espaço e garantir que tudo esteja pronto para sua sessão."
               },
               {
                 question: "Posso cancelar minha reserva?",
@@ -366,7 +380,7 @@ export default function Home() {
               },
               {
                 question: "O que está incluído no aluguel do estúdio?",
-                answer: "O estúdio inclui iluminação profissional completa, fundos variados, tripés, rebatedores e todo equipamento básico de iluminação. Você só precisa trazer sua câmera."
+                answer: "O estúdio inclui o uso de todo o espaço, fundo infinito e fundo reto, cenários, poltronas, cadeiras e camarim."
               },
               {
                 question: "Qual é a duração mínima de aluguel?",
@@ -374,7 +388,7 @@ export default function Home() {
               },
               {
                 question: "Posso trazer minha equipe?",
-                answer: "Claro! O estúdio comporta confortavelmente até 8 pessoas, incluindo fotógrafo, assistentes, modelos e equipe de produção."
+                answer: "Claro! O estúdio comporta confortavelmente até 25 pessoas, incluindo fotógrafos, assistentes, modelos e equipe de produção."
               },
               {
                 question: "Há estacionamento disponível?",
@@ -454,4 +468,3 @@ export default function Home() {
     </div>
   );
 }
-

@@ -70,6 +70,18 @@ const processSteps = [
   }
 ];
 
+const studioRules = [
+  "A contagem da reserva inicia no horário agendado, não no momento da chegada. Atrasos não estendem o período de locação.",
+  "Caso chegue antes e o estúdio esteja disponível, o tempo de uso começará a ser contabilizado a partir da sua entrada.",
+  "O término ocorre quando o cronômetro apitar. Após a tolerância do pacote, será cobrado tempo adicional.",
+  "Disponibilizamos filtro de água, geladeira e cafeteira. Sinta-se à vontade para trazer suas próprias bebidas e lanches.",
+  "Reagendamentos devem ser solicitados com até 48h de antecedência. Após, será cobrada uma taxa de 30% do valor total.",
+  "Cancelamentos não são reembolsáveis, pois o horário é reservado exclusivamente para você.",
+  "Equipamentos de grande porte, como o difusor butterfly, são permitidos apenas em locações exclusivas do espaço.",
+  "Horas extras adicionadas no dia da locação serão cobradas pelo valor da hora avulsa, independentemente do pacote.",
+  "É estritamente proibido pisar na curva do fundo infinito, pois ela é feita de gesso e pode ser danificada."
+];
+
 function HeroSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [scrollY, setScrollY] = useState(0);
@@ -148,7 +160,7 @@ export default function Home() {
       const scrollY = window.scrollY;
 
       // IDs das seções claras (header preto)
-      const lightSectionIds = ['sobre', 'processo', 'depoimentos', 'faq'];
+      const lightSectionIds = ['sobre', 'processo', 'depoimentos', 'faq', 'regras'];
       // IDs das seções escuras (header branco)
       const darkSectionIds = ['cta', 'agende', 'contato'];
 
@@ -219,8 +231,6 @@ export default function Home() {
               <a href="#sobre" className="px-3 py-2 hover:opacity-70 transition-all duration-300">Sobre</a>
               <span className={isHeaderDark ? 'text-black/30' : 'text-white/30'}>|</span>
               <a href="#agende" className="px-3 py-2 hover:opacity-70 transition-all duration-300">Agende</a>
-
-
             </nav>
             <MobileMenu isDark={isHeaderDark} />
 
@@ -421,6 +431,32 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="regras" className="bg-neutral-50 text-neutral-900">
+        <div className="max-w-7xl mx-auto px-4 py-20 md:py-32">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-12 h-px bg-black"></div>
+              <span className="text-sm font-medium text-neutral-600 uppercase tracking-wider">Regras do Estúdio</span>
+              <div className="w-12 h-px bg-black"></div>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Para uma boa convivência</h2>
+            <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
+              Algumas diretrizes para garantir a melhor experiência para todos.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+            {studioRules.map((rule, index) => (
+              <div key={index} className="flex items-start gap-5">
+                <div className="flex-shrink-0 w-10 h-10 bg-black text-white flex items-center justify-center font-semibold text-lg">
+                  {index + 1}
+                </div>
+                <p className="text-neutral-700 leading-relaxed pt-1">{rule}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <footer className="bg-black text-white border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-12">
